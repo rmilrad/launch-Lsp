@@ -8,11 +8,11 @@ const { parseFixed } = require("@ethersproject/bignumber");
 const lspCreatorAddress = "0x57EE47829369e2EF62fBb423648bec70d0366204"; // Mumbai address
 const ancillaryData = "";
 const proposerReward = 0;
-const networkUrl = "https://matic-mumbai.chainstacklabs.com";
+const networkUrl = "https://rpc-mumbai.maticvigil.com";
 const mnemonic = "off neither whip umbrella skill monitor wall cup style fatal device month";
-const collateralToken = "0xA77a597C1b0ddA403aF54656c28bF7Bc0565351c";
-const financialProductLibrary = "0x2CcA11DbbDC3E028D6c293eA5d386eE887071C59";
-const gaspPrice = 50;
+const collateralToken = "0x8C086885624C5b823Cc6fcA7BFF54C454D6b5239";
+const financialProductLibrary = "0xC7B7029373f504949553106c9eb2dAfDd48eF086";
+const _gasPrice = 50;
 const _networkId = 80001;
 // Athlete Params
 
@@ -51,7 +51,7 @@ async function deployAthlete( _synthName, _synthSymbol, _expirationTimestamp, an
   // LSP parameters. Pass in arguments to customize these.
   const lspParams = {
     expirationTimestamp: _expirationTimestamp, // Timestamp that the contract will expire at.
-    collateralPerPair: 1000000000000000000,
+    collateralPerPair: 10000000000000,
     priceIdentifier: padRight(utf8ToHex("SPD"), 64), // Price identifier to use.
     syntheticName: _synthName, // Long name.
     syntheticSymbol: _synthSymbol, // Short name.
@@ -73,7 +73,7 @@ async function deployAthlete( _synthName, _synthSymbol, _expirationTimestamp, an
   // Transaction parameters
   const transactionOptions = {
     gas: 12000000, // 12MM is very high. Set this lower if you only have < 2 ETH or so in your wallet.
-    gasPrice: gasPrice * 1000000000, // gasprice arg * 1 GWEI
+    gasPrice: _gasPrice * 1000000000, // gasprice arg * 1 GWEI
     from: account,
   };
 
@@ -90,4 +90,6 @@ async function deployAthlete( _synthName, _synthSymbol, _expirationTimestamp, an
 
 
 // TODO: Log each file to a save
-deployAthlete("Lebron James", "aLJB", "1628623703");
+deployAthlete("Lebron James", "aLJB", "1628623703", "").catch(err => {
+  console.error(err);
+});
