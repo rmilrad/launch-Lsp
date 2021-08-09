@@ -5,21 +5,21 @@ const { getAbi, getAddress } = require("@uma/core");
 const { parseFixed } = require("@ethersproject/bignumber");
 
 // Web3 Contract Params
-const lspCreatorAddress = "0x81b0A8206C559a0747D86B4489D0055db4720E84"; // Kovan address
+const lspCreatorAddress = "0x57EE47829369e2EF62fBb423648bec70d0366204"; // Mumbai address
 const ancillaryData = "";
 const proposerReward = 0;
-const kovanUrl = "https://kovan.infura.io/v3/81a0954561a94859a0c84f8be1d3afa6";
-const mumbaiUrl = "";
-const mnemonic = "<private mnemonic>";
+const networkUrl = "https://matic-mumbai.chainstacklabs.com";
+const mnemonic = "off neither whip umbrella skill monitor wall cup style fatal device month";
 const collateralToken = "0xA77a597C1b0ddA403aF54656c28bF7Bc0565351c";
 const financialProductLibrary = "0x2CcA11DbbDC3E028D6c293eA5d386eE887071C59";
 const gaspPrice = 50;
+const _networkId = 80001;
 // Athlete Params
 
 
 
-async function deployAthlete( _synthName, _synthSymbol, _expirationTimestamp, _priceIdentifier) {
-  const url = kovanUrl;
+async function deployAthlete( _synthName, _synthSymbol, _expirationTimestamp, ancillaryData) {
+  const url = networkUrl;
 
   // See HDWalletProvider documentation: https://www.npmjs.com/package/@truffle/hdwallet-provider.
   const hdwalletOptions = {
@@ -38,7 +38,7 @@ async function deployAthlete( _synthName, _synthSymbol, _expirationTimestamp, _p
   if (!accounts || accounts.length === 0)
     throw "No accounts. Must provide mnemonic or node must have unlocked accounts.";
   const account = accounts[0];
-  const networkId = await web3.eth.net.getId();
+  const networkId = _networkId;
 
   // Grab collateral decimals.
   const collateral = new web3.eth.Contract(
@@ -52,7 +52,7 @@ async function deployAthlete( _synthName, _synthSymbol, _expirationTimestamp, _p
   const lspParams = {
     expirationTimestamp: _expirationTimestamp, // Timestamp that the contract will expire at.
     collateralPerPair: 1000000000000000000,
-    priceIdentifier: padRight(utf8ToHex(_priceIdentifier), 64), // Price identifier to use.
+    priceIdentifier: padRight(utf8ToHex("SPD"), 64), // Price identifier to use.
     syntheticName: _synthName, // Long name.
     syntheticSymbol: _synthSymbol, // Short name.
     collateralToken: collateralToken, // Collateral token address.
@@ -90,3 +90,4 @@ async function deployAthlete( _synthName, _synthSymbol, _expirationTimestamp, _p
 
 
 // TODO: Log each file to a save
+deployAthlete("Lebron James", "aLJB", "1628623703");
