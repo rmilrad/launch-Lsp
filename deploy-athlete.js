@@ -9,7 +9,8 @@ const lspCreatorAddress = "0x57EE47829369e2EF62fBb423648bec70d0366204"; // Mumba
 const ancillaryData = "";
 const proposerReward = 0;
 const networkUrl = "https://rpc-mumbai.maticvigil.com";
-const mnemonic = "off neither whip umbrella skill monitor wall cup style fatal device month";
+const fs = require('fs');
+const mnemonic = fs.readFileSync(".secret").toString().trim();
 const collateralToken = "0x8C086885624C5b823Cc6fcA7BFF54C454D6b5239";
 const financialProductLibrary = "0xC7B7029373f504949553106c9eb2dAfDd48eF086";
 const _gasPrice = 50;
@@ -90,6 +91,6 @@ async function deployAthlete( _synthName, _synthSymbol, _expirationTimestamp, an
 
 
 // TODO: Log each file to a save
-deployAthlete("Lebron James", "aLJB", "1628623703", "").catch(err => {
+deployAthlete("Derrick Henry", "aDH", "1628623703", "0001 0001").catch(err => {
   console.error(err);
 });
